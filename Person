@@ -1,0 +1,129 @@
+//2020.7.6 Uto-hong 
+//I completed this small project in my university's Basic Java Programing class(2020-1). This class's Advisor is Prof. Jun Hwang.
+
+//This project's Progress steps : 
+  //1. Person class & Person class's ToString() 
+  //2. Management class's addPerson(), searchName(), searchPhone() and UserInterface class's case 2(Input new address), case 3(Search the address)
+  //3. Management class's deleteByName(), deleteByPhone() and UserInterface class's case 4(View the entire addressbook), case 6(Delete the address)
+  //4. Management class's modify(), UserInterface class's case 5(Modify the data)
+  //5. Person class's writeMyField(), Management class's writeFile(), UserInterface class's case 8(Export the file)
+  //5. Person class's readMyField(), Management class's readFile(), UserInterface class's case 1(Import the file)
+  
+
+//Person class is an important unit that you use to handle the data.
+//If you write address in the UserInterface class, then Management class will save one person's data as one Person class data type. (class is user-defined data type)
+
+import java.io.*;
+
+public class Person {
+		//Define variables
+		private String name;   		//이름
+		private String phone;		//전화번호
+		private String birth;		//생년월일
+		private String mail;		//이메일
+		private String address;		//주소
+		
+		//생성자 추가1
+		public Person()
+		{
+			name = "";
+			phone = "";
+			birth = "";
+			address = "";
+			mail = "";
+		}
+		 //생성자 추가2
+		public Person(String name,String phone,String birth,String mail,String address)
+		{
+			 this.name = name;
+			 this.phone = phone;
+			 this.birth = birth;
+			 this.mail = mail;
+			 this.address = address;
+		}
+		
+		//필드에 대한 접근자 변경자인 setter,getter 추가
+		public String getName()
+		{
+			 return name;
+		}
+		
+		public void setName(String name)
+		{
+			 this.name = name;
+		}
+		
+		public String getPhone()
+		{
+			 return phone;
+		}
+		
+		public void setPhone(String phone)
+		{
+			 this.phone = phone;
+		}
+		
+		public String getBirth()
+		{
+			 return birth;
+		}
+		
+		public void setBirth(String birth)
+		{
+			 this.birth = birth;
+		}
+		
+		public String getMail()
+		{
+			 return mail;
+		}
+		
+		public void setMail(String mail)
+		{
+			 this.mail = mail;
+		}
+		
+		public String getAddress()
+		{
+			 return address;
+		}
+		
+		public void setAddress(String address)
+		{
+			 this.address = address;
+		}
+		
+		public String ToString() 
+		{
+			return name+"\n"+phone+"\n"+birth+"\n"+mail+"\n"+address;
+		}
+		
+		//필드 입력하는 메소드
+		public void writeMyField(DataOutputStream file)
+		{
+			try {
+				file.writeUTF(name);
+				file.writeUTF(phone);
+				file.writeUTF(birth);
+				file.writeUTF(mail);
+				file.writeUTF(address);
+			}
+			catch(IOException ioe) {
+				System.out.println("파일을 입력할 수 없습니다.");
+			}
+		} 
+		
+		//필드 읽는 메소드
+		public void readMyField(DataInputStream file)
+		{
+			try {
+				name = file.readUTF();
+				phone = file.readUTF();
+				birth = file.readUTF();
+				mail = file.readUTF();
+				address = file.readUTF();
+			}catch(IOException ioe) {
+				System.out.println("파일을 읽을 수 없습니다.");
+			}
+		}
+}
