@@ -6,8 +6,8 @@
   //2. Management class's addPerson(), searchName(), searchPhone() and UserInterface class's case 2(Input new address), case 3(Search the address)
   //3. Management class's deleteByName(), deleteByPhone() and UserInterface class's case 4(View the entire addressbook), case 6(Delete the address)
   //4. Management class's modify(), UserInterface class's case 5(Modify the data)
-  //5. Person class's writeMyField(), Management class's writeFile(), UserInterface class's case 8(Export the file)
-  //5. Person class's readMyField(), Management class's readFile(), UserInterface class's case 1(Import the file)
+  //5. Person class's writeMyField(), Management class's writeFile(), UserInterface class's case 8(Export the data as file)
+  //6. Person class's readMyField(), Management class's readFile(), UserInterface class's case 1(Import the data from file)
   
 
 //Person class is an important unit that you use to handle the data.
@@ -17,13 +17,13 @@ import java.io.*;
 
 public class Person {
 		//Define variables
-		private String name;   		//이름
-		private String phone;		//전화번호
-		private String birth;		//생년월일
-		private String mail;		//이메일
-		private String address;		//주소
+		private String name;   		
+		private String phone;		
+		private String birth;		
+		private String mail;		
+		private String address;		
 		
-		//생성자 추가1
+		//constructor1
 		public Person()
 		{
 			name = "";
@@ -32,7 +32,7 @@ public class Person {
 			address = "";
 			mail = "";
 		}
-		 //생성자 추가2
+		 //constructor2
 		public Person(String name,String phone,String birth,String mail,String address)
 		{
 			 this.name = name;
@@ -42,7 +42,7 @@ public class Person {
 			 this.address = address;
 		}
 		
-		//필드에 대한 접근자 변경자인 setter,getter 추가
+		//getter(), setter()
 		public String getName()
 		{
 			 return name;
@@ -98,7 +98,8 @@ public class Person {
 			return name+"\n"+phone+"\n"+birth+"\n"+mail+"\n"+address;
 		}
 		
-		//필드 입력하는 메소드
+		//5. Export the data as a file.
+		//User writes the data. - > Management class saves the data as Person class. - > Export as file.
 		public void writeMyField(DataOutputStream file)
 		{
 			try {
@@ -109,11 +110,11 @@ public class Person {
 				file.writeUTF(address);
 			}
 			catch(IOException ioe) {
-				System.out.println("파일을 입력할 수 없습니다.");
 			}
 		} 
 		
-		//필드 읽는 메소드
+		//6. Import the data from a file.
+		//Read the data from a file created in 5.
 		public void readMyField(DataInputStream file)
 		{
 			try {
@@ -123,7 +124,6 @@ public class Person {
 				mail = file.readUTF();
 				address = file.readUTF();
 			}catch(IOException ioe) {
-				System.out.println("파일을 읽을 수 없습니다.");
 			}
 		}
 }
